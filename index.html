@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anti Cat Mat – Peralatan Hewan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #fdf6ee;
+    --warm-brown: #3b2a1a;
+    --accent: #e05c2a;
+    --accent2: #f4a261;
+    --green: #2d6a4f;
+    --light-green: #b7e4c7;
+    --black: #1a1209;
+    --muted: #8a7060;
+    --card-bg: #fff8f0;
+    --shadow: 0 8px 40px rgba(59,42,26,0.10);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--warm-brown);
+    overflow-x: hidden;
+  }
+
+  /* ── NAVBAR ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 6vw;
+    background: rgba(253,246,238,0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1.5px solid rgba(224,92,42,0.10);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem; font-weight: 900;
+    color: var(--warm-brown); letter-spacing: -0.5px;
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-badge {
+    background: var(--accent);
+    color: #fff; font-size: 0.72rem; font-weight: 600;
+    padding: 6px 16px; border-radius: 99px; letter-spacing: 0.5px;
+    text-transform: uppercase; text-decoration: none;
+    transition: opacity 0.2s;
+  }
+  .nav-badge:hover { opacity: 0.85; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100svh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 110px 6vw 60px;
+    gap: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 70% 40%, #f4c28440 0%, transparent 60%),
+                radial-gradient(ellipse at 10% 80%, #b7e4c730 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .hero-text { position: relative; z-index: 2; }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--light-green); color: var(--green);
+    font-size: 0.78rem; font-weight: 600; letter-spacing: 1px;
+    text-transform: uppercase; padding: 6px 14px; border-radius: 99px;
+    margin-bottom: 24px;
+  }
+  .hero-eyebrow::before { content: '🌿'; }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+    font-weight: 900; line-height: 1.07;
+    color: var(--black); margin-bottom: 20px;
+  }
+  .hero h1 em { color: var(--accent); font-style: normal; }
+  .hero-desc {
+    font-size: 1.05rem; color: var(--muted); line-height: 1.7;
+    max-width: 420px; margin-bottom: 36px;
+  }
+  .hero-cta {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--accent); color: #fff;
+    padding: 16px 36px; border-radius: 99px;
+    font-weight: 600; font-size: 1rem;
+    text-decoration: none;
+    box-shadow: 0 6px 28px rgba(224,92,42,0.35);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(224,92,42,0.45); }
+
+  .hero-visual {
+    position: relative; z-index: 2;
+    display: flex; justify-content: center; align-items: center;
+  }
+  .hero-img-wrap {
+    position: relative; width: 100%; max-width: 480px;
+  }
+  .hero-img-main {
+    width: 100%; border-radius: 24px;
+    box-shadow: 0 24px 64px rgba(59,42,26,0.22);
+    object-fit: cover; aspect-ratio: 1/1;
+    animation: float 5s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+  .hero-badge-float {
+    position: absolute; bottom: -18px; left: -20px;
+    background: #fff; border-radius: 16px;
+    padding: 14px 20px;
+    box-shadow: 0 8px 32px rgba(59,42,26,0.14);
+    display: flex; align-items: center; gap: 10px;
+    animation: float 5s ease-in-out infinite 0.8s;
+  }
+  .hero-badge-float .icon { font-size: 2rem; }
+  .hero-badge-float .label { font-size: 0.78rem; color: var(--muted); }
+  .hero-badge-float .value { font-size: 0.95rem; font-weight: 700; color: var(--black); }
+  .hero-badge-float2 {
+    position: absolute; top: 24px; right: -16px;
+    background: var(--accent); color: #fff;
+    border-radius: 16px; padding: 12px 18px;
+    box-shadow: 0 8px 24px rgba(224,92,42,0.28);
+    font-size: 0.82rem; font-weight: 700; text-align: center;
+    animation: float 5s ease-in-out infinite 1.5s;
+  }
+  .hero-badge-float2 .big { font-size: 1.6rem; display: block; line-height: 1; }
+
+  /* ── STATS ── */
+  .stats {
+    display: grid; grid-template-columns: repeat(3,1fr);
+    gap: 24px; padding: 60px 6vw;
+    border-top: 1.5px solid rgba(59,42,26,0.07);
+  }
+  .stat-card {
+    background: var(--card-bg);
+    border-radius: 20px; padding: 28px 24px;
+    text-align: center;
+    border: 1.5px solid rgba(224,92,42,0.10);
+    transition: transform 0.2s;
+  }
+  .stat-card:hover { transform: translateY(-4px); }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem; font-weight: 900; color: var(--accent);
+  }
+  .stat-label { font-size: 0.85rem; color: var(--muted); margin-top: 4px; }
+
+  /* ── SECTION TITLE ── */
+  .section-label {
+    text-align: center; margin-bottom: 14px;
+    font-size: 0.78rem; font-weight: 600; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--accent);
+  }
+  .section-title {
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.7rem, 3.5vw, 2.6rem);
+    font-weight: 900; color: var(--black);
+    margin-bottom: 48px; line-height: 1.15;
+  }
+  .section-title em { color: var(--accent); font-style: normal; }
+
+  /* ── FEATURES ── */
+  .features { padding: 80px 6vw; }
+  .features-grid {
+    display: grid; grid-template-columns: repeat(3,1fr); gap: 28px;
+  }
+  .feat-card {
+    background: var(--card-bg); border-radius: 22px;
+    padding: 32px 28px;
+    border: 1.5px solid rgba(224,92,42,0.10);
+    transition: transform 0.25s, box-shadow 0.25s;
+    position: relative; overflow: hidden;
+  }
+  .feat-card::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(224,92,42,0.05) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .feat-card:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
+  .feat-icon { font-size: 2.4rem; margin-bottom: 18px; }
+  .feat-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem; font-weight: 700; margin-bottom: 10px;
+  }
+  .feat-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
+
+  /* ── GALLERY ── */
+  .gallery { padding: 80px 6vw; background: var(--black); }
+  .gallery .section-label { color: var(--accent2); }
+  .gallery .section-title { color: #fff; }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .gallery-item {
+    border-radius: 18px; overflow: hidden;
+    position: relative; cursor: zoom-in;
+  }
+  .gallery-item:first-child {
+    grid-column: span 2;
+  }
+  .gallery-item img {
+    width: 100%; height: 280px; object-fit: cover;
+    transition: transform 0.4s;
+    display: block;
+  }
+  .gallery-item:first-child img { height: 400px; }
+  .gallery-item:hover img { transform: scale(1.06); }
+  .gallery-item .overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(26,18,9,0.5), transparent);
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .gallery-item:hover .overlay { opacity: 1; }
+
+  /* ── HOW TO USE ── */
+  .how { padding: 80px 6vw; }
+  .steps {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+  }
+  .step { text-align: center; position: relative; }
+  .step::after {
+    content: '';
+    position: absolute; top: 28px; left: calc(50% + 36px);
+    width: calc(100% - 72px); height: 2px;
+    background: repeating-linear-gradient(90deg, var(--accent) 0, var(--accent) 6px, transparent 6px, transparent 12px);
+  }
+  .step:last-child::after { display: none; }
+  .step-num {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: var(--accent); color: #fff;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem; font-weight: 900;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 18px;
+    box-shadow: 0 6px 20px rgba(224,92,42,0.35);
+  }
+  .step h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem; font-weight: 700; margin-bottom: 8px;
+  }
+  .step p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+
+  /* ── REVIEWS ── */
+  .reviews { padding: 80px 6vw; background: #fff8f0; }
+  .reviews-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  }
+  .review-card {
+    background: #fff; border-radius: 20px; padding: 28px 24px;
+    box-shadow: 0 4px 20px rgba(59,42,26,0.07);
+    border: 1.5px solid rgba(224,92,42,0.08);
+    transition: transform 0.2s;
+  }
+  .review-card:hover { transform: translateY(-4px); }
+  .review-stars { color: #f4a261; font-size: 1rem; margin-bottom: 12px; }
+  .review-user {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 16px;
+  }
+  .review-avatar {
+    width: 42px; height: 42px; border-radius: 50%;
+    background: var(--accent); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 1rem; flex-shrink: 0;
+  }
+  .review-name { font-weight: 600; font-size: 0.9rem; }
+  .review-variant { font-size: 0.75rem; color: var(--muted); }
+  .review-text { font-size: 0.9rem; color: #5a4535; line-height: 1.6; margin-bottom: 16px; }
+  .review-img-row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .review-img-row img {
+    width: 80px; height: 80px; object-fit: cover;
+    border-radius: 10px; border: 2px solid rgba(224,92,42,0.12);
+  }
+  .review-date { font-size: 0.75rem; color: var(--muted); margin-top: 14px; }
+  .review-highlight {
+    display: inline-block;
+    background: var(--light-green); color: var(--green);
+    font-size: 0.72rem; font-weight: 600; padding: 3px 10px;
+    border-radius: 99px; margin-bottom: 10px;
+  }
+
+  /* ── CTA BOTTOM ── */
+  .cta-section {
+    padding: 90px 6vw;
+    background: linear-gradient(135deg, #3b2a1a 0%, #1a1209 100%);
+    text-align: center; position: relative; overflow: hidden;
+  }
+  .cta-section::before {
+    content: '🐾';
+    position: absolute; font-size: 200px; opacity: 0.03;
+    top: -20px; right: -20px; pointer-events: none;
+  }
+  .cta-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem); font-weight: 900;
+    color: #fff; margin-bottom: 16px; line-height: 1.15;
+  }
+  .cta-section h2 em { color: var(--accent2); font-style: normal; }
+  .cta-section p { color: rgba(255,255,255,0.65); font-size: 1rem; margin-bottom: 40px; }
+  .shop-now-btn {
+    display: inline-flex; align-items: center; gap: 14px;
+    background: #25D366;
+    color: #fff; text-decoration: none;
+    padding: 20px 48px; border-radius: 99px;
+    font-weight: 700; font-size: 1.1rem;
+    box-shadow: 0 8px 36px rgba(37,211,102,0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+    letter-spacing: 0.3px;
+  }
+  .shop-now-btn:hover { transform: translateY(-3px); box-shadow: 0 16px 48px rgba(37,211,102,0.5); }
+  .wa-icon { font-size: 1.5rem; }
+  .cta-note { margin-top: 20px; color: rgba(255,255,255,0.4); font-size: 0.82rem; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--black); color: rgba(255,255,255,0.4);
+    text-align: center; padding: 28px 6vw;
+    font-size: 0.82rem;
+  }
+  footer strong { color: rgba(255,255,255,0.75); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; text-align: center; padding: 90px 5vw 50px; }
+    .hero-desc { max-width: 100%; }
+    .hero-visual { margin-top: 20px; }
+    .hero-badge-float { left: 10px; }
+    .hero-badge-float2 { right: 10px; }
+    .stats { grid-template-columns: repeat(3,1fr); }
+    .features-grid { grid-template-columns: 1fr 1fr; }
+    .steps { grid-template-columns: 1fr 1fr; }
+    .step::after { display: none; }
+    .reviews-grid { grid-template-columns: 1fr 1fr; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; }
+    .gallery-item:first-child { grid-column: span 2; }
+  }
+  @media (max-width: 600px) {
+    .hero h1 { font-size: 2.2rem; }
+    .stats { grid-template-columns: 1fr; gap: 12px; padding: 40px 5vw; }
+    .features-grid, .reviews-grid, .steps { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: 1fr; }
+    .gallery-item:first-child { grid-column: span 1; }
+    .hero-badge-float, .hero-badge-float2 { display: none; }
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(32px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-up { animation: fadeUp 0.7s ease both; }
+  .delay-1 { animation-delay: 0.12s; }
+  .delay-2 { animation-delay: 0.24s; }
+
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-logo">Peralatan<span>Hewan</span></div>
+  <a href="https://wa.me/628995578789?text=Halo%20kak%2C%20saya%20mau%20membeli%20produknya%20kak%2C%20apakah%20barang%20masih%20tersedia%20%3F" target="_blank" class="nav-badge">Shop Now →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text fade-up">
+    <div class="hero-eyebrow">Solusi Anti Kucing Terbaik</div>
+    <h1>Lindungi Area<br>Rumahmu dari<br><em>Gangguan Kucing</em></h1>
+    <p class="hero-desc">Anti Cat Mat dengan duri plastik aman yang efektif menghalau kucing, tikus, dan hewan liar tanpa menyakiti. Fleksibel, tahan lama, dan bisa disambung sesuai kebutuhan.</p>
+    <a href="https://wa.me/628995578789?text=Halo%20kak%2C%20saya%20mau%20membeli%20produknya%20kak%2C%20apakah%20barang%20masih%20tersedia%20%3F" target="_blank" class="hero-cta">
+      🛒 Beli Sekarang via WhatsApp
+    </a>
+  </div>
+  <div class="hero-visual fade-up delay-2">
+    <div class="hero-img-wrap">
+      <img class="hero-img-main" src="img/photo_2026-05-09_20-15-04__3_.jpg" alt="Anti Cat Mat">
+      <div class="hero-badge-float">
+        <div class="icon">⭐</div>
+        <div>
+          <div class="value">4.8 / 5</div>
+          <div class="label">3.600+ Ulasan</div>
+        </div>
+      </div>
+      <div class="hero-badge-float2">
+        <span class="big">✅</span>
+        Aman untuk<br>hewan
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat-card reveal">
+    <div class="stat-num">3.600+</div>
+    <div class="stat-label">Ulasan Pelanggan</div>
+  </div>
+  <div class="stat-card reveal">
+    <div class="stat-num">100%</div>
+    <div class="stat-label">Aman & Tidak Menyakiti</div>
+  </div>
+  <div class="stat-card reveal">
+    <div class="stat-num">49cm</div>
+    <div class="stat-label">Panjang per Panel</div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section class="features">
+  <div class="section-label">Keunggulan Produk</div>
+  <h2 class="section-title">Kenapa Pilih <em>Anti Cat Mat</em>?</h2>
+  <div class="features-grid">
+    <div class="feat-card reveal">
+      <div class="feat-icon">🔗</div>
+      <h3>Dapat Disambung</h3>
+      <p>Panel bisa disambungkan satu sama lain dengan mudah untuk menutupi area yang lebih luas sesuai kebutuhan Anda.</p>
+    </div>
+    <div class="feat-card reveal">
+      <div class="feat-icon">💪</div>
+      <h3>Fleksibel & Kuat</h3>
+      <p>Terbuat dari plastik berkualitas tinggi — fleksibel, kuat, dan tidak mudah patah meski digunakan di luar ruangan.</p>
+    </div>
+    <div class="feat-card reveal">
+      <div class="feat-icon">🐾</div>
+      <h3>Tidak Menyakiti</h3>
+      <p>Duri plastik dirancang untuk memberi rasa tidak nyaman, bukan menyakiti — aman 100% untuk kucing dan hewan peliharaan.</p>
+    </div>
+    <div class="feat-card reveal">
+      <div class="feat-icon">🌧️</div>
+      <h3>Tahan Cuaca</h3>
+      <p>Bisa digunakan di dalam maupun luar ruangan — taman, balkon, pot tanaman, meja, atap, dan masih banyak lagi.</p>
+    </div>
+    <div class="feat-card reveal">
+      <div class="feat-icon">📐</div>
+      <h3>Ukuran Pas</h3>
+      <p>Dimensi 13×49 cm per panel, spike setinggi 2.7 cm. Mudah dipotong dan disesuaikan dengan bentuk area yang dilindungi.</p>
+    </div>
+    <div class="feat-card reveal">
+      <div class="feat-icon">🚀</div>
+      <h3>Pengiriman Cepat</h3>
+      <p>Ribuan pelanggan puas dengan pengiriman yang cepat dan aman ke seluruh Indonesia.</p>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery">
+  <div class="section-label">Galeri Produk</div>
+  <h2 class="section-title" style="color:#fff;">Lihat Produknya <em>Lebih Dekat</em></h2>
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <img src="img/photo_2026-05-09_20-15-04 (4).jpg" alt="Cat on mat">
+      <div class="overlay"></div>
+    </div>
+    <div class="gallery-item">
+      <img src="img/photo_2026-05-09_20-15-04.jpg" alt="Product detail">
+      <div class="overlay"></div>
+    </div>
+    <div class="gallery-item">
+      <img src="img/photo_2026-05-09_20-15-03__2_.jpg" alt="Flexible mat">
+      <div class="overlay"></div>
+    </div>
+    <div class="gallery-item">
+      <img src="img/photo_2026-05-09_20-15-03.jpg" alt="Dimensions">
+      <div class="overlay"></div>
+    </div>
+    <div class="gallery-item">
+      <img src="img/photo_2026-05-09_20-15-04__2_.jpg" alt="Outdoor use">
+      <div class="overlay"></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW TO USE -->
+<section class="how">
+  <div class="section-label">Cara Penggunaan</div>
+  <h2 class="section-title">Mudah Dipasang <em>dalam Menit</em></h2>
+  <div class="steps">
+    <div class="step reveal">
+      <div class="step-num">1</div>
+      <h4>Ukur Area</h4>
+      <p>Tentukan area yang ingin dilindungi — taman, pot, meja, atap, atau lantai.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">2</div>
+      <h4>Sambungkan Panel</h4>
+      <p>Gunakan konektor bawaan untuk menyambung beberapa panel sesuai luas area.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">3</div>
+      <h4>Pasang di Tempatnya</h4>
+      <p>Letakkan mat dengan sisi duri menghadap ke atas di area yang ingin dijaga.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">4</div>
+      <h4>Nikmati Hasilnya</h4>
+      <p>Kucing dan hewan liar tidak akan mengganggu area Anda lagi!</p>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews">
+  <div class="section-label">Ulasan Pelanggan</div>
+  <h2 class="section-title">Apa Kata <em>Mereka?</em></h2>
+  <div class="reviews-grid">
+<!--
+    <div class="review-card reveal">
+      <div class="review-highlight">⭐ Terverifikasi</div>
+      <div class="review-stars">★★★★★</div>
+      <div class="review-user">
+        <div class="review-avatar">R</div>
+        <div>
+          <div class="review-name">redity.home</div>
+          <div class="review-variant">Variasi: 13×49</div>
+        </div>
+      </div>
+      <p class="review-text">Pengirimannya cepat dan aman. Semoga kucing dan tikus enggak bisa masuk lagi. Karena kalo pake cairan semprotan itu percuma mereka masih bisa masuk. Jadi saya cari solusi pakai alat Duriduri ini.</p>
+      <div class="review-img-row">
+        <img src="img/4.jpg" alt="Review">
+      </div>
+      <div class="review-date">06 Des 2024</div>
+    </div>
+  -->
+  <div class="review-card reveal">
+    <div class="review-img-row">
+      <img src="img/1.jpg" alt="1">
+    </div>
+  </div>
+  
+  <style>
+  .review-card{
+    width: 350px; /* ukuran card */
+    overflow: hidden;
+    border-radius: 12px;
+  }
+  
+  .review-img-row img{
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+  </style>
+
+<style>
+  .review-card{
+    width: 350px;
+    overflow: hidden;
+    border-radius: 12px;
+  }
+  
+  .review-img-row{
+    width: 100%;
+  }
+  
+  .review-img-row img{
+    width: 100%;
+    display: block;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-top: 8px;
+  }
+  </style>
+  
+  <div class="review-card reveal">
+    <div class="review-img-row">
+      <img src="img/2.jpg" alt="2">
+    </div>
+  </div>
+  
+  
+  <div class="review-card reveal">
+    <div class="review-img-row">
+      <img src="img/4.jpg" alt="4">
+    </div>
+  </div>
+  
+  <div class="review-card reveal">
+    <div class="review-img-row">
+      <img src="img/5.jpg" alt="5">
+    </div>
+  </div>
+
+    <div class="review-card reveal" style="background:linear-gradient(135deg,#3b2a1a,#1a1209);color:#fff;border-color:transparent;">
+      <div style="font-size:3rem;margin-bottom:12px;">⭐</div>
+      <div style="font-family:'Playfair Display',serif;font-size:3rem;font-weight:900;color:#f4a261;">4.8</div>
+      <div style="color:rgba(255,255,255,0.7);margin-bottom:16px;">dari 5 bintang</div>
+      <div style="color:rgba(255,255,255,0.5);font-size:0.85rem;">Berdasarkan 3.600+ ulasan pembeli</div>
+      <div style="margin-top:24px;color:#b7e4c7;font-size:0.85rem;font-weight:600;">✅ Ukuran pas · ✅ Pengiriman cepat<br>✅ Kualitas sesuai deskripsi</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2>Siap Lindungi<br>Rumahmu <em>Sekarang?</em></h2>
+  <p>Pesan langsung via WhatsApp — respons cepat, pengiriman ke seluruh Indonesia!</p>
+  <p>Bisa bayar pakai apa aja (transfer bank-Dana-OVO-Gopay), tracking pengiriman by nomer RESI</p>
+  <p>Produk langsung dikirimkan setelah pembayaran diterima</p>
+  <a href="https://wa.me/628995578789?text=Halo%20kak%2C%20saya%20mau%20membeli%20produknya%20kak%2C%20apakah%20barang%20masih%20tersedia%20%3F"
+     target="_blank" class="shop-now-btn">
+    <span class="wa-icon"></span>
+    Pesan via – WhatsApp
+  </a>
+  <p class="cta-note">Klik tombol di atas untuk langsung chat dengan kami</p>
+</section>
+
+<footer>
+  <strong>Peralatan Hewan</strong> — Anti Cat Mat | Cat Repelling Specialist<br>
+  <span style="font-size:0.78rem;">© 2025 Peralatan Hewan. Semua hak dilindungi.</span>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 60);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
